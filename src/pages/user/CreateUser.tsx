@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Form, Input, Radio, InputNumber, DatePicker, Modal } from "antd";
 import { IUserModel } from "@common/interface";
-import moment from "moment";
+import { Moment } from "moment";
 
 export class EditUser extends Component<ICreateUserProps> {
   submitCreateUser = (user: IUserModel) => {
     this.props.createUser(user);
-    this.props.toggleShowCreateModel();    
+    this.props.toggleShowCreateModel();
   };
 
   render() {
@@ -54,7 +54,7 @@ const FormModal = (props: {
           id: "",
           userName: userName,
           sex: sex,
-          birthday: moment(birthday).format("MM/dd/yyyy hh:mm:ss"),
+          birthday: (birthday as Moment).format("MM/dd/yyyy hh:mm:ss"),
           firstName: firstName,
           lastName: lastName,
           age: age,
@@ -162,8 +162,18 @@ const FormModal = (props: {
           <Form.Item className="FormItem" label="Last Name" name="lastName">
             <Input placeholder="Last Name" />
           </Form.Item>
-          <Form.Item className="FormItem" label="Sex" name="sex">
-            <Radio.Group defaultValue={"1"}>
+          <Form.Item
+            className="FormItem"
+            label="Sex"
+            name="sex"
+            rules={[
+              {
+                required: true,
+                message: "Please input your Sex!",
+              },
+            ]}
+          >
+            <Radio.Group>
               <Radio value="1">Man</Radio>
               <Radio value="2">Woman</Radio>
             </Radio.Group>
@@ -203,10 +213,10 @@ const FormModal = (props: {
   );
 };
 
-interface ICreateUserProps  {  
-    isShowCreateModel: boolean;
-    toggleShowCreateModel: () => void;
-    createUser: (user: IUserModel) => void;
+interface ICreateUserProps {
+  isShowCreateModel: boolean;
+  toggleShowCreateModel: () => void;
+  createUser: (user: IUserModel) => void;
 }
 
 export default EditUser;

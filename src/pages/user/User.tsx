@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { UserBusiness, IUserBusiness } from "../../business/user/user";
 import CreateUser from "./CreateUser";
 import { IUserModel } from "@common/interface";
+import { SexName } from "@common/enum";
 
 @inject(UserBusiness)
 @observer
@@ -24,25 +25,6 @@ class User extends Component<IUserProps, IUserState> {
   createUser = () => {
     this.setState({ isCreate: true });
   };
-
-  // submitCreateUser = () => {
-  //   const now = new Date();
-  //   const user: UserModel = {
-  //     id: this.guid(),
-  //     userName: "Jason" + now.getMilliseconds().toString(),
-  //     firstName: Math.ceil(Math.random() * 10000).toString(),
-  //     lastName: Math.ceil(Math.random() * 10000).toString(),
-  //     sex: now.getMilliseconds() % 2 === 0 ? "男" : "女",
-  //     age: Math.ceil(Math.random() * 100),
-  //     birthday: now.toString(),
-  //   };
-  //   const userList = CreateUser(user);
-  //   this.setState({ userList: userList, isCreate: false });
-  // };
-
-  // cancel = () => {
-  //   this.setState({ isCreate: false });
-  // };
 
   columns: ColumnType<any>[] = [
     {
@@ -68,6 +50,9 @@ class User extends Component<IUserProps, IUserState> {
       title: "Sex",
       dataIndex: "sex",
       sorter: true,
+      render: (sex) => {
+        return SexName[sex];
+      },
     },
     {
       title: "Age",
