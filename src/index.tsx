@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import { Layout } from "antd";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
@@ -12,6 +11,7 @@ import { Provider } from "mobx-react";
 import { configure } from "mobx";
 import { AppMenu } from "./pages/menu/menu";
 import Store, { UserControl } from "./store/store";
+import "./index.css";
 
 const { Header, Content } = Layout;
 

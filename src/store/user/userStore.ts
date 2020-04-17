@@ -1,18 +1,15 @@
-import { UserModel } from "@common/entity";
 import { Read, Write } from "@common/localStrogeApi";
-import { Sex } from "@common/enum";
-import UserCreateStore from "./userCreateStore";
 import { observable, action, runInAction } from "mobx";
+import { IUserModel } from "@common/interface";
 
 export class UserStore {
   @observable
-  userList: UserModel[] = [];
+  userList: IUserModel[] = [];
 
   userdbName = "user";
-  userCreateStore: UserCreateStore;
   constructor() {
-      Write(this.userdbName,[]);
-    this.userCreateStore = new UserCreateStore();
+    let userList = this.getAllUserList();
+    Write(this.userdbName, userList ?? []);
   }
 
   @action
@@ -31,9 +28,37 @@ export class UserStore {
     this.getUserList();
   }
 
-  getAllUserList(): UserModel[] {
+  @observable
+  isShowCreateModel: boolean = false;
+  @action
+  toggleShowCreateModel() {
+    runInAction(() => {
+      this.isShowCreateModel = !this.isShowCreateModel;
+    });
+  }
+
+  getAllUserList(): IUserModel[] {
     let userList = Read(this.userdbName) ?? [];
     return userList;
+  }
+
+  guid() {
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (
+      c
+    ) {
+      var r = (Math.random() * 16) | 0,
+        v = c === "x" ? r : (r & 0x3) | 0x8;
+      return v.toString(16);
+    });
+  }
+
+  @action
+  createUser(user: IUserModel) {
+    user.id = this.guid();
+    let userList: IUserModel[] = this.getAllUserList();
+    userList.unshift(user);
+    Write(this.userdbName, userList);
+    this.getUserList();
   }
 }
 

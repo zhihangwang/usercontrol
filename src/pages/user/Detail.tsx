@@ -73,5 +73,4 @@
 // }
 
 // export default UserDetail;
-
 export default null;

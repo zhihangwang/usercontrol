@@ -1,18 +1,20 @@
 import React, { Component } from "react";
-import { Table, Row, Col, Button, Modal } from "antd";
+import { Table, Row, Col, Button } from "antd";
 import { ColumnType } from "antd/lib/table";
 //import { GetUserList, CreateUser, RemoveUser } from "./Api";
 import moment from "moment";
 import { inject, observer } from "mobx-react";
-import { UserModel } from "@common/entity";
 import { Link } from "react-router-dom";
 import { UserBusiness, IUserBusiness } from "../../business/user/user";
+import CreateUser from "./CreateUser";
+import { IUserModel } from "@common/interface";
 
 @inject(UserBusiness)
 @observer
 class User extends Component<IUserProps, IUserState> {
   constructor(props: IUserProps) {
     super(props);
+    console.log(this.props);
   }
 
   componentDidMount() {
@@ -47,7 +49,7 @@ class User extends Component<IUserProps, IUserState> {
       title: "UserName",
       dataIndex: "userName",
       sorter: true,
-      render: (userName: string, rowRaw: UserModel) => {
+      render: (userName: string, rowRaw: IUserModel) => {
         return <Link to={`/User/${rowRaw.id}`}>{userName}</Link>;
       },
     },
@@ -87,7 +89,7 @@ class User extends Component<IUserProps, IUserState> {
         return (
           <Button
             onClick={(e) => {
-              this.deleteUser(id);
+              this.props.deleteUser(id);
             }}
           >
             Delete
@@ -96,10 +98,6 @@ class User extends Component<IUserProps, IUserState> {
       },
     },
   ];
-
-  deleteUser = (userId: string) => {
-    //this.setState({ userList: RemoveUser(userId) });
-  };
 
   tableChange = () => {};
 
@@ -113,17 +111,12 @@ class User extends Component<IUserProps, IUserState> {
             </h3>
           </Col>
           <Col span={4} push={2}>
-            <Button onClick={this.createUser}>Add User</Button>
-            {/* <Modal
-              visible={this.state.isCreate}
-              okText="Submit"
-              cancelText="Cancel"
-              onOk={this.submitCreateUser}
-              onCancel={this.cancel}
-              closable={false}
-            >
-              54345
-            </Modal> */}
+            <Button onClick={this.props.toggleShowCreateModel}>Add User</Button>
+            <CreateUser
+              isShowCreateModel={this.props.isShowCreateModel}
+              toggleShowCreateModel={this.props.toggleShowCreateModel}
+              createUser={this.props.createUser}
+            />
           </Col>
         </Row>
         <Table

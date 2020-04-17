@@ -4,8 +4,10 @@ export interface IUserModel {
   userName: string;
   firstName: string;
   lastName: string;
+  email: string;
   sex: number;
   age: number;
+  password:string;
   birthday: string;
 }
 
