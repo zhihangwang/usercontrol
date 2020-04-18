@@ -26,8 +26,7 @@ function DetailView(props: {
   return (
     <div>
       {Object.entries(props.user).map((x) => {
-        let [objectEntriekey, objectEntrieValue] = x;
-        console.log(objectEntriekey);
+        let [objectEntriekey, objectEntrieValue] = x;        
         return (
           <ItemView
             name={objectEntriekey}

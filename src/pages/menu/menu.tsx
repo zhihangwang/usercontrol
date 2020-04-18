@@ -9,11 +9,12 @@ import {
 } from "@ant-design/icons";
 
 import { NavLink } from "react-router-dom";
+import _ from "lodash";
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
-export class AppMenu extends Component {
+export class AppMenu extends Component<IMenuProps> {
   state = {
     collapsed: false,
   };
@@ -23,29 +24,36 @@ export class AppMenu extends Component {
       collapsed: !this.state.collapsed,
     });
   };
+
   render() {
     return (
       <Sider>
         <Menu
-          defaultSelectedKeys={["1"]}
-          defaultOpenKeys={["1"]}
           mode="inline"
           theme="dark"
           inlineCollapsed={this.state.collapsed}
+          selectedKeys={[`/${this.props.location.pathname.split("/")[1]}`]}
         >
-          <Menu.Item key="1">
+          <Menu.Item key="/">
+            <PieChartOutlined />
+            <NavLink to="/">
+              <span>Home</span>
+            </NavLink>
+          </Menu.Item>
+
+          <Menu.Item key="/User">
             <PieChartOutlined />
             <NavLink to="/User">
               <span>User</span>
             </NavLink>
           </Menu.Item>
-          <Menu.Item key="2">
+          <Menu.Item key="/Role">
             <DesktopOutlined />
             <NavLink to="/Role">
               <span>Role</span>
             </NavLink>
           </Menu.Item>
-          <Menu.Item key="3">
+          <Menu.Item key="4">
             <ContainerOutlined />
             <NavLink to="/Resource">
               <span>Resource</span>
@@ -86,3 +94,13 @@ export class AppMenu extends Component {
     );
   }
 }
+
+export interface IMenuProps {
+  location: {
+    pathname: string;
+  };
+  history: any;
+  match: any;
+}
+
+export default AppMenu;
