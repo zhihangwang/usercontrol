@@ -19,11 +19,22 @@ code {
     line-height: 50px;
     font-weight: 700;
     font-size: 20px;
+}
+
+.Header a {
     color: aliceblue;
 }
 
 .Content-Layout {
     height: 90%;
+}
+
+.Home {
+    color: red;
+    font-family: cursive;
+    font-weight: bolder;
+    line-height: 980px;
+    padding-left: 50%;
 }
 
 .Sider-Head {

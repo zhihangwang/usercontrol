@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
 class Role extends Component {
-  render() {    
-    return <h2>Hello,Welcome Your.</h2>;
+  render() {
+    return <h2 className="Home">Hello,Welcome Your.</h2>;
   }
 }
 
