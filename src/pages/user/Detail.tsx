@@ -35,7 +35,7 @@ function DetailView(props: {
           />
         );
       })}
-      <Row>
+      <Row className="DetailRow">
         <Col span={12} push={1}>
           <Link to={"/User"}>Go Back Index</Link>
         </Col>
@@ -65,7 +65,7 @@ function DetailView(props: {
 
 function ItemView(nameValue: { name: string; value: string }) {
   return (
-    <Row>
+    <Row className="DetailRow">
       <Col span={6} push={6}>
         {nameValue.name} :
       </Col>

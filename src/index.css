@@ -39,3 +39,7 @@ code {
 .Delete {
     color: red;
 }
+
+.DetailRow {
+    padding-top: 20px;
+}
