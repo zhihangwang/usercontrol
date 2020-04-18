@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import * as serviceWorker from "./serviceWorker";
-import { Layout, message } from "antd";
+import { Layout } from "antd";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Home from "./Home";
 import User from "./pages/user/User";
@@ -9,7 +9,6 @@ import UserDetail from "./pages/user/Detail";
 import Role from "./pages/role/Role";
 import { Provider } from "mobx-react";
 import { configure } from "mobx";
-import AppMenu from "./pages/menu/Menu";
 import Store, { UserControl } from "./store/store";
 import "./index.css";
 import Menu from "./pages/menu/Menu";

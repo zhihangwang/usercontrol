@@ -9,7 +9,6 @@ import {
 } from "@ant-design/icons";
 
 import { NavLink } from "react-router-dom";
-import _ from "lodash";
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
