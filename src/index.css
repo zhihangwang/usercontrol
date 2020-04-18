@@ -25,3 +25,17 @@ code {
 .Content-Layout {
     height: 90%;
 }
+
+.Sider-Head {
+    height: 50px;
+    background-color: #888585;
+}
+
+.Sider-Head button {
+    margin: 10px;
+    color: blue;
+}
+
+.Delete {
+    color: red;
+}

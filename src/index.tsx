@@ -5,7 +5,7 @@ import { Layout } from "antd";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Home from "./Home";
 import User from "./pages/user/User";
-//import UserDetail from "./pages/user/Detail";
+import UserDetail from "./pages/user/Detail";
 import Role from "./pages/role/Role";
 import { Provider } from "mobx-react";
 import { configure } from "mobx";
@@ -23,7 +23,7 @@ interface AppWindow extends Window {
   store: UserControl;
 }
 declare let window: AppWindow;
-window.store ={...Store};
+window.store = { ...Store };
 
 const page = () => {
   return (
@@ -40,7 +40,11 @@ const page = () => {
             <Content className="Page-Content">
               <Route path="/" exact component={Home}></Route>
               <Route path="/User" exact component={User}></Route>
-              {/* <Route path="/User/:id" exact component={UserDetail}></Route> */}
+              <Route
+                path="/User/:id/Detail"
+                exact
+                component={UserDetail}
+              ></Route>
               <Route path="/Role" exact component={Role}></Route>
             </Content>
           </Layout>

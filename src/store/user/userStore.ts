@@ -1,3 +1,4 @@
+import { UserdbTableName } from "@common/db";
 import { Read, Write } from "@common/localStrogeApi";
 import { observable, action, runInAction } from "mobx";
 import { IUserModel } from "@common/interface";
@@ -6,10 +7,9 @@ export class UserStore {
   @observable
   userList: IUserModel[] = [];
 
-  userdbName = "user";
   constructor() {
     let userList = this.getAllUserList();
-    Write(this.userdbName, userList ?? []);
+    Write(UserdbTableName, userList ?? []);
   }
 
   @action
@@ -24,7 +24,7 @@ export class UserStore {
   deleteUser(userId: string) {
     let userList = this.getAllUserList();
     let filterUserList = userList.filter((x) => x.id !== userId);
-    Write(this.userdbName, filterUserList);
+    Write(UserdbTableName, filterUserList);
     this.getUserList();
   }
 
@@ -38,7 +38,7 @@ export class UserStore {
   }
 
   getAllUserList(): IUserModel[] {
-    let userList = Read(this.userdbName) ?? [];
+    let userList = Read(UserdbTableName) ?? [];
     return userList;
   }
 
@@ -57,7 +57,7 @@ export class UserStore {
     user.id = this.guid();
     let userList: IUserModel[] = this.getAllUserList();
     userList.unshift(user);
-    Write(this.userdbName, userList);
+    Write(UserdbTableName, userList);
     this.getUserList();
   }
 }

@@ -5,7 +5,7 @@ import { ColumnType } from "antd/lib/table";
 import moment from "moment";
 import { inject, observer } from "mobx-react";
 import { Link } from "react-router-dom";
-import { UserBusiness, IUserBusiness } from "../../business/user/user";
+import { UserBusiness, IUserBusiness } from "../../business/user/userBusiness";
 import CreateUser from "./CreateUser";
 import { IUserModel } from "@common/interface";
 import { SexName } from "@common/enum";
@@ -13,11 +13,6 @@ import { SexName } from "@common/enum";
 @inject(UserBusiness)
 @observer
 class User extends Component<IUserProps, IUserState> {
-  constructor(props: IUserProps) {
-    super(props);
-    console.log(this.props);
-  }
-
   componentDidMount() {
     this.props.getUserList();
   }
@@ -32,7 +27,7 @@ class User extends Component<IUserProps, IUserState> {
       dataIndex: "userName",
       sorter: true,
       render: (userName: string, rowRaw: IUserModel) => {
-        return <Link to={`/User/${rowRaw.id}`}>{userName}</Link>;
+        return <Link to={`/User/${rowRaw.id}/Detail`}>{userName}</Link>;
       },
     },
     {
@@ -73,6 +68,7 @@ class User extends Component<IUserProps, IUserState> {
       render: (id: string) => {
         return (
           <Button
+            className="Delete"
             onClick={(e) => {
               this.props.deleteUser(id);
             }}
@@ -89,12 +85,8 @@ class User extends Component<IUserProps, IUserState> {
   render() {
     return (
       <div>
-        <Row>
-          <Col span={20} push={1}>
-            <h3>
-              <b>User List</b>
-            </h3>
-          </Col>
+        <Row className="Sider-Head">
+          <Col span={20} push={1}></Col>
           <Col span={4} push={2}>
             <Button onClick={this.props.toggleShowCreateModel}>Add User</Button>
             <CreateUser

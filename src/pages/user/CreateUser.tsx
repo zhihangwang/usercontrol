@@ -54,7 +54,7 @@ const FormModal = (props: {
           id: "",
           userName: userName,
           sex: sex,
-          birthday: (birthday as Moment).format("MM/dd/yyyy hh:mm:ss"),
+          birthday: (birthday as Moment).format("MM/DD/YYYY hh:mm:ss"),
           firstName: firstName,
           lastName: lastName,
           age: age,
@@ -185,10 +185,13 @@ const FormModal = (props: {
             rules={[
               {
                 required: true,
+                message: "Please input your Age!",
+              },
+              {
                 type: "number",
                 min: 0,
                 max: 99,
-                message: "Age error,Please input sure Age.",
+                message: "Age is 0-99. Please input again.",
               },
             ]}
           >
